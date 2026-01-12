@@ -3,6 +3,11 @@ import numpy as np
 import pandas as pd
 import numpy_financial as npf
 
+st.title("RFID ROI Calculator")
+st.write("Estimate potential ROI from implementing RFID in your stores.")
+st.caption("Adjust the inputs below to see your results.")
+
+
 
 def calculate_rfid_roi(inputs):
     revenue = inputs["items_per_year"] * inputs["average_unit_retail"]
