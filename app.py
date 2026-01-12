@@ -101,53 +101,6 @@ headcount_reduction = st.number_input(
     value=5,
     help="How many fewer people you expect to need after RFID improves efficiency."
 )
-st.header("Warehouse RFID ROI")
-
-    # --- Shipment loss inputs ---
-    shipments_per_year = st.number_input(
-        "Annual shipments",
-        min_value=0,
-        value=500_000
-    )
-
-    lost_shipment_rate = st.number_input(
-        "Lost or mis-shipped rate (%)",
-        min_value=0.0,
-        max_value=100.0,
-        value=1.0
-    )
-
-    avg_shipment_cost = st.number_input(
-        "Average cost per shipment ($)",
-        min_value=0.0,
-        value=120.0
-    )
-
-    rfid_loss_reduction_pct = st.number_input(
-        "Loss reduction with RFID (%)",
-        min_value=0.0,
-        max_value=100.0,
-        value=50.0
-    )
-
-    # --- Labor inputs ---
-    warehouse_headcount = st.number_input(
-        "Warehouse headcount",
-        min_value=0,
-        value=50
-    )
-
-    avg_fully_loaded_cost = st.number_input(
-        "Average fully loaded cost per employee ($/year)",
-        min_value=0.0,
-        value=65_000.0
-    )
-
-    headcount_reduction = st.number_input(
-        "Headcount reduction with RFID",
-        min_value=0,
-        value=5
-    )
 
     # --- Calculations ---
     lost_shipments = shipments_per_year * (lost_shipment_rate / 100)
