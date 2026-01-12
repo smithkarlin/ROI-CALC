@@ -54,7 +54,6 @@ else:
     # --- Shipment loss inputs ---
     shipments_per_year = st.number_input(
         "Annual shipments",
-         "This is how many boxes or orders your warehouse sends out in one year.",
         min_value=0,
         value=500_000
     )
