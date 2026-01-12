@@ -44,14 +44,14 @@ def calculate_rfid_roi(inputs):
         quarters += 1
     
     return {
-        "Annual Revenue ($)": revenue,
+        "Annual Revenue": revenue,
         "Out-of-Stock Recovery": out_of_stock_recovery,
         "Markdown Savings": markdown_savings,
         "Shrink Savings": shrink_savings,
         "Labor Savings": labor_savings,
         "Total Annual Benefit": total_annual_benefit,
         "ROI (%)": roi * 100,
-        "NPV ($)": npv,
+        "NPV": npv,
         "Payback Period (quarters)": quarters
     }
 
@@ -69,7 +69,7 @@ st.write("Estimate potential ROI from implementing RFID technology in your store
 st.header("Scenario Inputs")
 
 items_per_year = st.number_input("Items Sold per Year", min_value=0, value=980_000, step=10_000)
-average_unit_retail = st.number_input("Average Unit Retail ($)", min_value=0.0, value=10.0, step=0.5)
+average_unit_retail = st.number_input("Average Unit Retail (USD)", min_value=0.0, value=10.0, step=0.5)
 
 inventory_accuracy_current = st.slider("Current Inventory Accuracy (%)", 50, 95, 66) / 100
 inventory_accuracy_rfid = st.slider("Inventory Accuracy with RFID (%)", 80, 99, 95) / 100
@@ -82,10 +82,10 @@ rfid_shrink_pct = st.number_input("Expected Shrink with RFID (% of Revenue)", mi
 
 inventory_counts_per_year = st.number_input("Number of Inventory Counts per Year", min_value=0, value=13)
 labor_hours_per_count = st.number_input("Labor Hours per Count", min_value=0, value=178)
-labor_cost_per_hour = st.number_input("Labor Cost per Hour ($)", min_value=0.0, value=15.0)
+labor_cost_per_hour = st.number_input("Labor Cost per Hour (USD)", min_value=0.0, value=15.0)
 
-initial_deployment_cost = st.number_input("Initial Deployment Cost ($)", min_value=0, value=1_100_000)
-annual_ongoing_cost = st.number_input("Annual Ongoing Cost ($)", min_value=0, value=69_000)
+initial_deployment_cost = st.number_input("Initial Deployment Cost (USD)", min_value=0, value=1_100_000)
+annual_ongoing_cost = st.number_input("Annual Ongoing Cost (USD)", min_value=0, value=69_000)
 discount_rate = st.slider("Discount Rate (%)", 0.0, 20.0, 10.0) / 100
 years = st.number_input("Investment Horizon (Years)", min_value=1, value=5)
 
@@ -117,12 +117,13 @@ if st.button("Calculate ROI"):
     results = calculate_rfid_roi(inputs)
     
     st.subheader("Key Metrics")
-    st.metric("ROI (%)", f"{results['ROI (%)']:.1f}%")
-    st.metric("Net Present Value ($)", f"${results['NPV ($)']:,}")
+    st.metric("ROI (%)", f"{results['ROI (%)']:.1f}")
+    st.metric("Net Present Value (USD)", f"${results['NPV']:,}")
     st.metric("Payback Period (quarters)", f"{results['Payback Period (quarters)']}")
-    st.metric("Total Annual Benefit ($/yr)", f"${results['Total Annual Benefit']:,}")
+    st.metric("Total Annual Benefit (USD/yr)", f"${results['Total Annual Benefit']:,}")
     
     st.subheader("Breakdown of Benefits")
+    # Create a safe table without $ or parentheses in keys
     df = pd.DataFrame({
         "Benefit": [
             "Out-of-Stock Recovery",
@@ -130,7 +131,7 @@ if st.button("Calculate ROI"):
             "Shrink Savings",
             "Labor Savings"
         ],
-        "Amount ($)": [
+        "Amount (USD)": [
             results["Out-of-Stock Recovery"],
             results["Markdown Savings"],
             results["Shrink Savings"],
