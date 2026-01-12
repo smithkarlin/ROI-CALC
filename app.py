@@ -101,6 +101,12 @@ headcount_reduction = st.number_input(
     value=5,
     help="How many fewer people you expect to need after RFID improves efficiency."
 )
+rfid_annual_cost = st.number_input(
+    "Estimated annual RFID program cost ($)",
+    min_value=0.0,
+    value=250_000.0,
+    help="About how much you think RFID would cost per year, including tags, hardware, software, and support."
+)
 
  # --- Calculations ---
 lost_shipments = shipments_per_year * (lost_shipment_rate / 100)
@@ -108,6 +114,8 @@ annual_loss_cost = lost_shipments * avg_shipment_cost
 loss_savings = annual_loss_cost * (rfid_loss_reduction_pct / 100)
 labor_savings = headcount_reduction * avg_fully_loaded_cost
 total_annual_benefit = loss_savings + labor_savings
+net_annual_value = total_annual_benefit - rfid_annual_cost
+
 # --- Outputs ---
 st.subheader("Estimated Annual Benefit")
 st.write(f"Lost shipment savings: ${loss_savings:,.0f}")
@@ -116,5 +124,7 @@ st.divider()
 
 st.subheader("Total Annual RFID Benefit")
 st.write(f"${total_annual_benefit:,.0f}")
+st.subheader("Net Annual Value")
+st.write(f"${net_annual_value:,.0f}")
 
 
