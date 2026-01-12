@@ -51,7 +51,7 @@ if use_case == "Retail Store":
 e# ======================
 # WAREHOUSE CALCULATOR
 # ======================
-else:
+    else:
     st.header("Warehouse / DC RFID ROI")
 
     # --- Shipment loss inputs ---
