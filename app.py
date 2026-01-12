@@ -49,7 +49,59 @@ if use_case == "Retail Store":
 # WAREHOUSE CALCULATOR
 # ======================
 else:
-    st.header("Warehouse RFID ROI")
+    st.header("Warehouse / DC RFID ROI")
+
+shipments_per_year = st.number_input(
+    "Annual shipments",
+    min_value=0,
+    value=500_000,
+    help="How many boxes or orders your warehouse ships in one year."
+)
+
+lost_shipment_rate = st.number_input(
+    "Lost or mis-shipped rate (%)",
+    min_value=0.0,
+    max_value=100.0,
+    value=1.0,
+    help="Out of 100 shipments, how many are lost or sent to the wrong place."
+)
+
+avg_shipment_cost = st.number_input(
+    "Average cost per shipment ($)",
+    min_value=0.0,
+    value=120.0,
+    help="How much money you lose when one shipment goes missing or is shipped incorrectly."
+)
+
+rfid_loss_reduction_pct = st.number_input(
+    "Loss reduction with RFID (%)",
+    min_value=0.0,
+    max_value=100.0,
+    value=50.0,
+    help="How much RFID reduces lost shipments. If RFID cuts losses in half, enter 50%."
+)
+
+warehouse_headcount = st.number_input(
+    "Warehouse headcount",
+    min_value=0,
+    value=50,
+    help="How many people currently work in the warehouse."
+)
+
+avg_fully_loaded_cost = st.number_input(
+    "Average fully loaded cost per employee ($/year)",
+    min_value=0.0,
+    value=65_000.0,
+    help="What one employee costs per year including pay, benefits, and taxes."
+)
+
+headcount_reduction = st.number_input(
+    "Headcount reduction with RFID",
+    min_value=0,
+    value=5,
+    help="How many fewer people you expect to need after RFID improves efficiency."
+)
+st.header("Warehouse RFID ROI")
 
     # --- Shipment loss inputs ---
     shipments_per_year = st.number_input(
@@ -116,3 +168,5 @@ else:
 
     st.subheader("Total Annual RFID Benefit")
     st.write(f"${total_annual_benefit:,.0f}")
+
+
