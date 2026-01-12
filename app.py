@@ -103,9 +103,9 @@ headcount_reduction = st.number_input(
 )
 
  # --- Calculations ---
- lost_shipments = shipments_per_year * (lost_shipment_rate / 100)
-annual_loss_cost = lost_shipments * avg_shipment_cost
-loss_savings = annual_loss_cost * (rfid_loss_reduction_pct / 100)
+     lost_shipments = shipments_per_year * (lost_shipment_rate / 100)
+    annual_loss_cost = lost_shipments * avg_shipment_cost
+    loss_savings = annual_loss_cost * (rfid_loss_reduction_pct / 100)
 labor_savings = headcount_reduction * avg_fully_loaded_cost
 total_annual_benefit = loss_savings + labor_savings
 # --- Outputs ---
